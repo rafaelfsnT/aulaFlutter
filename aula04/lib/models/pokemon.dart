@@ -4,8 +4,12 @@ class Pokemon {
   String? imagem;
 
   Pokemon({required this.numero, required this.nome, this.imagem});
-}
 
-class Teste {
-  var poke = Pokemon(numero: '1', nome: 'mewto');
+  factory Pokemon.fromMap(Map<String, dynamic> map) {
+    return Pokemon(
+      numero: map["num"],
+      nome: map["name"],
+      imagem: map["img"],
+    );
+  }
 }

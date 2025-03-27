@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:aula04/datasources/remote/pokemon_remote.dart';
+import 'package:aula04/models/pokemon.dart';
 import 'package:aula04/ui/pages/sobre_page.dart';
+import 'package:aula04/ui/widgets/circulo_espera.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,12 +31,53 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               onPressed: _abrirSobre,
-              icon: Icon(Icons.help_outline_outlined),
+              icon: Icon(Icons.catching_pokemon_outlined),
               color: Colors.white,
             ),
           ],
         ),
+        body: Column(
+          children: [
+            Expanded(
+              child: FutureBuilder(
+                future: PokemonRemote().get(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return CirculoEspera();
+                    default:
+                      return _criarLista(context, snapshot.data ?? []);
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _criarLista(BuildContext context, List<Pokemon> dados) {
+    return ListView.builder(
+      itemCount: dados.length,
+      padding: EdgeInsets.all(12),
+
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.all(6),
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(6),
+              child: Text(
+                dados[index].nome,
+                style: TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
