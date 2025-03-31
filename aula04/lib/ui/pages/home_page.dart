@@ -69,10 +69,16 @@ class _HomePageState extends State<HomePage> {
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(6),
-              child: Text(
-                dados[index].nome,
-                style: TextStyle(fontSize: 25),
-                textAlign: TextAlign.center,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      dados[index].nome,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward_ios, size: 15),
+                ],
               ),
             ),
           ),
