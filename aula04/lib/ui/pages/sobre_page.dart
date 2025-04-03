@@ -1,3 +1,4 @@
+import 'package:aula04/ui/widgets/barra_titulo.dart';
 import 'package:flutter/material.dart';
 
 class SobrePage extends StatelessWidget {
@@ -5,11 +6,10 @@ class SobrePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Placeholder(
+    return Placeholder(
       child: Scaffold(
-        appBar: AppBar(title: Text('Chegou no Sobre'),),
+        appBar: BarraTitulo().criar('Sobre a Pokedex')
       ),
-
     );
   }
 }
