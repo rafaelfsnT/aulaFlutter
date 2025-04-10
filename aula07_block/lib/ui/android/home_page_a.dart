@@ -34,6 +34,10 @@ class _HomePageAState extends State<HomePageA> {
               'Etanol',
               TextInputType.number,
             ),
+            ElevatedButton(
+              onPressed: calcBloc.calculate,
+              child: Text('Calcular'),
+            ),
           ],
         ),
       ),
